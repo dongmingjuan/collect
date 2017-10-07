@@ -62,3 +62,7 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'carrierwave-upyun'
 # 全局配置
 gem 'config'
+# 表单
+gem 'simple_form'
+# 权限管理
+gem 'cancancan', '~> 2.0'

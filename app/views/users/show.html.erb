@@ -1,13 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-<p>
-  <strong>avatar:</strong>
-	<img src="<%= @user.avatar.url('40') %>">
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="panel panel-default">
+<div class="panel-heading font-bold">
+  查看用户
+</div>
+<div class="panel-body">
+  <%= render "show", user: @user %>
+</div>
+</div>

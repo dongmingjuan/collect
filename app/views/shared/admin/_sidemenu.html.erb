@@ -1,0 +1,40 @@
+<aside id="aside" class="app-aside app-aside-fixed hidden-xs bg-dark">
+  <div class="aside-wrap">
+    <div class="navi-wrap">
+      <!-- nav -->
+      <nav ui-nav class="navi clearfix">
+        <ul class="nav">
+          <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+            <span>导航</span>
+          </li>
+          <li class="<%= "active" if controller_name == "home" %>">
+            <a href="/admin/home" class="auto">
+              <i class="glyphicon glyphicon-stats icon text-primary"></i>
+              <span class="font-bold">控制面板</span>
+            </a>
+          </li>
+          <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+            <span>平台管理</span>
+          </li>
+
+            <li class="<%= "active" if controller_name == "categories" %>">
+              <a href="articles" class="auto">
+                <i class="fa fa-file-text"></i>
+                <span>文章管理</span>
+              </a>
+            </li>
+
+            <li class="<%= "active" if controller_name == "users" %>">
+              <a href="admin_users" class="auto">
+                <i class="fa fa-users"></i>
+                <span>用户管理</span>
+              </a>
+            </li>
+
+          <li class="line dk hidden-folded"></li>
+        </ul>
+      </nav>
+      <!-- nav -->
+    </div>
+  </div>
+</aside>
