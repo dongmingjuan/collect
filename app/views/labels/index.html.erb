@@ -1,9 +1,10 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    用户列表
-    <% if can? :create, User %>
+    标签列表
+   <%= link_to "一键激活", allactive_labels_path, method: :put, class: "btn btn-default btn-xs" %>
+    <% if can? :create, Label %>
     <div class="pull-right">
-      <%= link_to "新建用户", new_user_path, class: "btn btn-primary btn-xs" %>
+      <%= link_to "新建标签", new_label_path, class: "btn btn-primary btn-xs" %>
     </div>
     <% end %>
   </div>
@@ -11,20 +12,20 @@
     <table class="table table-striped b-t b-light">
       <thead>
         <tr>
-          <th>邮箱</th>
-          <th>连接</th>
-          <th>图片</th>
+          <th>标签名</th>
+          <th>使用次数</th>
+          <th>激活状态</th>
           <th style="width:120px;">创建时间</th>
           <th>操作</th>
         </tr>
       </thead>
       <tbody>
-        <%= render(@users) %>
+        <%= render(@labels) %>
       </tbody>
     </table>
   </div>
   <footer class="panel-footer">
     <%#= paginate @users, views_prefix: 'admin',theme: 'angulr' %>
-    <%= render partial: "shared/admin/paginate", locals: { object: @users } %>
+    <%= render partial: "shared/admin/paginate", locals: { object: @labels } %>
   </footer>
 </div>

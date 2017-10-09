@@ -1,0 +1,20 @@
+<tr>
+  <td><%= label.name %></td>
+  <td><%= label.used_count%></td>
+  <td><%= label.active%></td>
+  <td><%= label.created_at.strftime("%F %T")%></td>
+  <td>
+  	<%= link_to "查看", label, class: "btn btn-default btn-xs" %>
+  	<% if can? :update, Label %>
+    <%= link_to "修改", edit_label_path(label), class: "btn btn-default btn-xs" %>
+    <% end %>
+    <% if can? :destroy, Label %>
+    <%= link_to "删除", label_path(label), method: :delete, class: "btn btn-default btn-xs" %>
+    <% end %>
+    <% if label.active %>
+   <%= link_to "取消激活", unactive_label_path(label,page: params[:page]), method: :put, class: "btn btn-default btn-xs" %>
+    <% else %>
+     <%= link_to "激活", active_label_path(label,page: params[:page]), method: :put, class: "btn btn-default btn-xs" %>
+    <% end %>
+  </td>
+</tr>

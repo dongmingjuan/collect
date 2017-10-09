@@ -1,13 +1,14 @@
 <%= simple_form_for(@user, html: { multipart: true, class: "form-horizontal" }) do |f| %>
   <%= f.input :email, label: "用户邮箱" %>
+  <%= f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %>
   <div class="line line-dashed b-b line-lg pull-in"></div>
   <% if @user.avatar_url  %>
     <div class="col-sm-10 col-sm-offset-2 m-b">
       <%= image_tag @user.avatar_url('40'), class: "img-thumbnail" %>
     </div>
   <% end %>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
   <%= f.input :avatar,  label: "用户头像" %>
-
   <%#= f.input :active, as: :boolean, html: true,  label: "活动宣传图片" %>
   <div class="line line-dashed b-b line-lg pull-in"></div>
   <div class="col-sm-10 col-sm-offset-2">

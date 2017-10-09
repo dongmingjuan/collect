@@ -1,5 +1,5 @@
 <%= simple_form_for(@user, html: { multipart: true, class: "form-horizontal" }) do |f| %>
-  <%= f.input :email, label: "用户邮箱" %>
+  <%= f.input :email, label: "用户邮箱", placeholder: 'xxx@xx.com' %>
   <div class="line line-dashed b-b line-lg pull-in"></div>
   <% if @user.avatar_url  %>
     <div class="col-sm-10 col-sm-offset-2 m-b">
@@ -7,7 +7,9 @@
     </div>
   <% end %>
   <%= f.input :avatar,  label: "用户头像" %>
-  <%= f.input :password, label: "用户密码", input_html: { size: 20 }%>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <%= f.input :password, label: "用户密码"%>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
   <%= f.input :password_confirmation, label: "确认密码" %>
   <%#= f.input :active, as: :boolean, html: true,  label: "活动宣传图片" %>
   <div class="line line-dashed b-b line-lg pull-in"></div>

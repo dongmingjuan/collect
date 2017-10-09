@@ -17,20 +17,27 @@
             <span>平台管理</span>
           </li>
 
-            <li class="<%= "active" if controller_name == "categories" %>">
-              <a href="articles" class="auto">
+            <li class="<%= "active" if controller_name == "articles" %>">
+              <a href="/articles" class="auto">
                 <i class="fa fa-file-text"></i>
                 <span>文章管理</span>
               </a>
             </li>
 
             <li class="<%= "active" if controller_name == "users" %>">
-              <a href="admin_users" class="auto">
+              <a href="/admin_users" class="auto">
                 <i class="fa fa-users"></i>
                 <span>用户管理</span>
               </a>
             </li>
-
+            <% if can? :manage, Label %>
+             <li class="<%= "active" if controller_name == "labels" %>">
+              <a href="/labels" class="auto">
+                <i class="fa fa-users"></i>
+                <span>标签管理</span>
+              </a>
+            </li>
+            <% end %>
           <li class="line dk hidden-folded"></li>
         </ul>
       </nav>

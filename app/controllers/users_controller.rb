@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
   layout 'admin'
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.all.order_by(:created_at.desc).page params[:page]
   end
 
   # GET /users/1
@@ -87,6 +88,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :avatar)
+      params.require(:user).permit(:email, :password, :password_confirmation, :avatar,:role)
     end
 end
