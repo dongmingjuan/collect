@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'users/sessions' }
   resources :users, :path => "admin_users"
-  resources :articles
+  resources :photos, only: [:index, :edit, :update, :destroy]
+  resources :articles do
+    resources :pictures#, shallow: true
+    collection do
+      get :ascending
+      get :descending
+    end
+  end
   resources :labels do
     member do
       put :active
@@ -9,10 +16,11 @@ Rails.application.routes.draw do
     end
     collection do
       put :allactive
+      get :ascending
+      get :descending
     end
   end
-  resources :pictures
-  root to: "users#index"
+  root to: "articles#index"
 
   # namespace :admin do
   # 	resources :users

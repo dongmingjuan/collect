@@ -20,7 +20,10 @@ module CollectArticle
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
+    # 设置为北京时间
     config.time_zone = "Beijing"
+    # 使用简体中文 config/locales/devise.zh-CN.yml
+    config.i18n.default_locale = "zh-CN"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

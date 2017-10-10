@@ -1,7 +1,14 @@
 <%= simple_form_for(@article, html: { multipart: true, class: "form-horizontal" }) do |f| %>
 <%= f.input :title, label: "文章标题" %>
 <div class="line line-dashed b-b line-lg pull-in"></div>
-<%= f.input :content, label: "文章内容" %>
+<div class="form-group text required page_content">
+    <label class="text  col-sm-2 control-label" for="page_content">
+      文章内容
+    </label>
+    <div class="col-sm-10">
+      <script type="text/plain" id="contentEditor" name="article[content]" id="article_content" style="width:800px;height:300px;"><%= raw(@article.content) %></script>
+    </div>
+  </div>
 <div class="line line-dashed b-b line-lg pull-in"></div>
 <div class="field">
   <div class="form-group string optional article_from">
@@ -16,6 +23,7 @@
 <%= f.input :from, label: "文章来源" %>
 <div class="line line-dashed b-b line-lg pull-in"></div>
 <%= f.input :view_count, label: "点击次数" %>
+
 <%#= f.input :active, as: :boolean, html: true,  label: "活动宣传图片" %>
 <div class="line line-dashed b-b line-lg pull-in"></div>
 <div class="col-sm-10 col-sm-offset-2">
@@ -23,4 +31,15 @@
   <%= link_to "返 回", articles_path, class: "btn btn-default" %>
 </div>
 <% end %>
+<%= content_for :style do %>
+  <link href="/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+<% end %>
 
+<% content_for :script do %>
+  <script type="text/javascript" charset="utf-8" src="/umeditor/umeditor.config.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/umeditor/umeditor.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/umeditor/lang/zh-cn/zh-cn.js"></script>
+  <script type="text/javascript">
+    var um1 = UM.getEditor('contentEditor');
+  </script>
+  <% end %>

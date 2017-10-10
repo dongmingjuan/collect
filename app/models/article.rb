@@ -2,7 +2,7 @@ class Article
   include Mongoid::Document
   include Mongoid::Timestamps
   # 每页默认显示记录数
-  paginates_per 1
+  paginates_per 2
 
   # 文章标题
   field :title, type: String

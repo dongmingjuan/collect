@@ -1,4 +1,5 @@
 class LabelsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_label, only: [:show, :edit, :update, :destroy, :active]
   load_and_authorize_resource
    layout 'admin'
@@ -38,7 +39,19 @@ class LabelsController < ApplicationController
     Label.update_all(active: true)
     redirect_to labels_path, notice: 'label was successfully all actived.'
   end
-  
+
+  def ascending
+    @labels = Label.all.page params[:page]
+    @labels = @labels.order_by(:used_count.asc)
+    render :index
+  end
+
+  def descending
+    @labels = Label.all.page params[:page]
+    @labels = @labels.order_by(:used_count.desc)
+    render :index
+  end
+
   # GET /lables/1/edit
   def edit
   end

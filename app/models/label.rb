@@ -2,7 +2,7 @@ class Label
   include Mongoid::Document
   include Mongoid::Timestamps
   # 标签名称
-  paginates_per 1
+  paginates_per 2
   field :name, type: String
   # 标签使用次数
   field :used_count, type: Integer

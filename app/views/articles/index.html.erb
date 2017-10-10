@@ -19,31 +19,30 @@
       <thead>
         <tr>
           <th>标题</th>
-          <th>内容</th>
           <th>来源</th>
           <th>点击次数&nbsp;
-            <a href="">
-            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true">
-            </a>
-            <a href="">
-            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true">
-            </a>
-          </button>
-          </th>
-          <th style="width:120px;">创建时间</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render(@articles) %>
-      </tbody>
-    </table>
+            <a href="/articles/ascending">
+              <span class="glyphicon glyphicon-arrow-up" aria-hidden="true">
+              </a>
+              <a href="/articles/descending">
+                <span class="glyphicon glyphicon-arrow-down" aria-hidden="true">
+                </a>
+              </button>
+            </th>
+            <th style="width:120px;">创建时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render(@articles) %>
+        </tbody>
+      </table>
+    </div>
+    <footer class="panel-footer">
+      <%#= paginate @users, views_prefix: 'admin',theme: 'angulr' %>
+      <%= render partial: "shared/admin/paginate", locals: { object: @articles } %>
+    </footer>
   </div>
-  <footer class="panel-footer">
-    <%#= paginate @users, views_prefix: 'admin',theme: 'angulr' %>
-    <%= render partial: "shared/admin/paginate", locals: { object: @articles } %>
-  </footer>
-</div>
 
 <!-- <script type="text/javascript">
   function search() {

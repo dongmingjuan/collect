@@ -1,7 +1,12 @@
 <%= simple_form_for(@article, html: { multipart: true, class: "form-horizontal" }) do |f| %>
 <%= f.input :title, label: "文章标题" %>
 <div class="line line-dashed b-b line-lg pull-in"></div>
-<%= f.input :content, label: "文章内容" %>
+	<div class="form-group string optional article_content">
+		<label class="col-sm-2 control-label string optional" for="article_content">文章内容</label>
+	<div class="col-sm-10">
+		<p><%= raw(@article.content) %></p>
+	</div>
+</div>
 <div class="line line-dashed b-b line-lg pull-in"></div>
 	<div class="form-group string optional article_from">
 	<label class="col-sm-2 control-label string optional" for="article_from">文章标签</label>
@@ -13,9 +18,29 @@
 <%= f.input :from, label: "文章来源" %>
 <div class="line line-dashed b-b line-lg pull-in"></div>
 <%= f.input :view_count, label: "点击次数" %>
+
+
 <%#= f.input :active, as: :boolean, html: true,  label: "活动宣传图片" %>
 <div class="line line-dashed b-b line-lg pull-in"></div>
-<div class="col-sm-10 col-sm-offset-2">
-  <%= link_to "返 回", articles_path, class: "btn btn-default" %>
-</div>
+<% end %>
+
+<% @pictures.each_with_index do |picture, index| %>
+  <% if picture.persisted? %>
+  <img src="<%= picture.image.url('40') %>">
+    <%= link_to "修改", edit_article_picture_path(id: picture.id, article_id: params[:id]), class: "btn btn-default btn-xs" %>
+    <%= link_to "删除", article_picture_path(id: picture.id, article_id: params[:id]), method: :delete, class: "btn btn-default btn-xs" %>
+  <% if (index + 1) % 2 == 0 %>
+    <br>
+  <% end %>
+  <% end %>
+<% end %>
+<div class="line line-dashed b-b line-lg pull-in"></div>
+
+<%= simple_form_for(@picture, url: article_pictures_path(article_id: params[:id]), html: { multipart: true, class: "form-horizontal" }) do |f| %>
+  <%= f.input :image, label: "图片" %>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="col-sm-10 col-sm-offset-2">
+    <%= f.button :submit, "提 交", class: "btn btn-primary" %>
+    <%= link_to "返 回", articles_path, class: "btn btn-default" %>
+  </div>
 <% end %>

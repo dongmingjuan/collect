@@ -7,7 +7,11 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = current_user.articles.order_by(:created_at.desc)
+    if current_user.role == 'admin'
+      @articles = Article.all.order_by(:created_at.desc)
+    else
+      @articles = current_user.articles.order_by(:created_at.desc)
+    end
     @articles = @articles.where(title: /#{params[:title]}/) unless params[:title].blank?
     @articles = @articles.where(content: /#{params[:content]}/) unless params[:content].blank?
     @articles = @articles.page params[:page]
@@ -16,6 +20,28 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    @pictures = @article.pictures
+    @picture = @pictures.build
+  end
+
+  def ascending
+    if current_user.role == 'admin'
+     @articles = Article.all.page params[:page]
+    else
+     @articles = current_user.articles.page params[:page]
+    end
+    @articles = @articles.order_by(:view_count.asc)
+    render :index
+  end
+
+  def descending
+    if current_user.role == 'admin'
+     @articles = Article.all.page params[:page]
+    else
+     @articles = current_user.articles.page params[:page]
+    end
+    @articles = @articles.order_by(:view_count.desc)
+    render :index
   end
 
   # GET /articles/new
@@ -26,7 +52,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
-    @article = current_user.articles.find(params[:id])
+    @article = Article.all.find(params[:id])
     @labels = Label.all.map { |label| [label.name, label.id.to_s] }
 
   end

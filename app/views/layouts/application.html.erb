@@ -9,13 +9,13 @@
   </head>
 
   <body>
-  	<% if user_signed_in? %>
-  		<%= link_to 'Sign Out', destroy_user_session_path,method: :delete,
-  		data: { confirm: 'Are you sure?'} %>
-  		<% else %>
-  		<%= link_to 'Sign In', new_user_session_path %>
-  		<% end %>
-  		<p class= "alert"><%= alert %></p>
+    <% if user_signed_in? %>
+      <%= link_to 'Sign Out', destroy_user_session_path,method: :delete,
+      data: { confirm: 'Are you sure?'} %>
+      <% else %>
+      <%= link_to 'Sign In', new_user_session_path %>
+      <% end %>
+      <p class= "alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
