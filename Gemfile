@@ -66,3 +66,7 @@ gem 'config'
 gem 'simple_form'
 # 权限管理
 gem 'cancancan', '~> 2.0'
+# 后台任务
+gem 'sidekiq'
+gem 'redis'
+gem "sidekiq-cron"

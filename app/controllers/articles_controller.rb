@@ -3,7 +3,6 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show,  :update, :destroy]
   load_and_authorize_resource
   layout 'admin'
-
   # GET /articles
   # GET /articles.json
   def index
@@ -20,6 +19,8 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    @article.view_count = $redis.incr("articles:#{@article.id.to_s}:view_count")
+    HardWorker.perform_async()
     @pictures = @article.pictures
     @picture = @pictures.build
   end
