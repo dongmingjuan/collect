@@ -12,7 +12,7 @@
 <div class="line line-dashed b-b line-lg pull-in"></div>
 <div class="field">
   <div class="form-group string optional article_from">
-    <label class="col-sm-2 control-label string optional" for="article_from">选择标签</label>
+    <label class="col-sm-2 control-label string optional" for="article_from">选择标签</label>&nbsp;&nbsp;&nbsp;&nbsp;
     <% @labels.each_with_index do |label, index| %>
     <input id="" name="checked_labels[<%= index %>]" type="checkbox" value="<%= label[1] %>" <%= article.labels.find(label[1]).nil? ? '' : 'checked' %> />
     <label for="pet_dog"><%= label[0] %></label>
