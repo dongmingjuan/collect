@@ -17,20 +17,25 @@
             <span>平台管理</span>
           </li>
 
+            <% if can? :read, Article %>
             <li class="<%= "active" if controller_name == "articles" %>">
               <a href="/articles" class="auto">
                 <i class="fa fa-file-text"></i>
                 <span>文章管理</span>
               </a>
             </li>
+            <% end %>
 
+            <% if can? :read, User %>
             <li class="<%= "active" if controller_name == "users" %>">
               <a href="/admin_users" class="auto">
                 <i class="fa fa-users"></i>
                 <span>用户管理</span>
               </a>
             </li>
-            <% if can? :manage, Label %>
+            <% end %>
+
+            <% if can? :read, Label %>
              <li class="<%= "active" if controller_name == "labels" %>">
               <a href="/labels" class="auto">
                 <i class="fa fa-users"></i>
@@ -38,12 +43,14 @@
               </a>
             </li>
             <% end %>
+             <% if can? :read, Picture %>
             <li class="<%= "active" if controller_name == "photos" %>">
               <a href="/photos" class="auto">
                 <i class="fa fa-users"></i>
                 <span>图片管理</span>
               </a>
             </li>
+            <% end %>
           <li class="line dk hidden-folded"></li>
         </ul>
       </nav>

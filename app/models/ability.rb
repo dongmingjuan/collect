@@ -8,9 +8,14 @@ class Ability
       if user.admin?
         can :manage, :all
       elsif user.role == 'user'
-        can :manage, Article, user: user
-        can :read, User
-        #can :update, User, itself: user
+        can :read, Article
+        can :read, Label
+        can :read, Picture
+        # can :update, User, itself: user
+      elsif user.role == 'editor'
+        can :manage, Article
+        can :manage, Label
+        can :manage, Picture
       end
     #
     # The first argument to `can` is the action you are giving the user

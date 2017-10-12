@@ -1,8 +1,9 @@
 <%= simple_form_for(@user, html: { multipart: true, class: "form-horizontal" }) do |f| %>
   <%= f.input :email, label: "用户邮箱" %>
   <div class="line line-dashed b-b line-lg pull-in"></div>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <div class="col-sm-offset-2">
   <%= f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %>
+  </div>
   <div class="line line-dashed b-b line-lg pull-in"></div>
   <% if @user.avatar_url  %>
     <div class="col-sm-10 col-sm-offset-2 m-b">

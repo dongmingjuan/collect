@@ -8,7 +8,9 @@
         <tr>
           <th>图片名</th>
           <th style="width:120px;">创建时间</th>
+          <% if can? :update, Picture %>
           <th>操作</th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
@@ -16,10 +18,12 @@
         <tr>
           <td><%= image_tag photo.image.url('40') %></td>
           <td><%= photo.created_at.strftime("%F %T")%></td>
+          <% if can? :update, Picture %>
           <td>
             <%= link_to "修改", edit_photo_path(photo), class: "btn btn-default btn-xs" %>
             <%= link_to "删除", photo_path(photo), method: :delete, class: "btn btn-default btn-xs" %>
           </td>
+          <% end %>
         </tr>
       <% end %>
       </tbody>

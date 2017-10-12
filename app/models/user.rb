@@ -1,8 +1,8 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
-  ROLES = %i[admin user]
-  paginates_per 1
+  ROLES = %i[admin user editor]
+  paginates_per 2
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :trackable, :validatable, :registerable

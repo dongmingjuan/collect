@@ -9,7 +9,7 @@
 </div>
 <div class="line line-dashed b-b line-lg pull-in"></div>
 	<div class="form-group string optional article_from">
-	<label class="col-sm-2 control-label string optional" for="article_from">文章标签</label>
+	<label class="col-sm-2 control-label string optional" for="article_from">文章标签</label>&nbsp;&nbsp;&nbsp;&nbsp;
   <% @article.labels.each do |l| %>
      <%= l.name %>
   <% end %>
@@ -23,8 +23,8 @@
 <%#= f.input :active, as: :boolean, html: true,  label: "活动宣传图片" %>
 <div class="line line-dashed b-b line-lg pull-in"></div>
 <% end %>
+<div class="col-sm-offset-2">
 <% @pictures.each_with_index do |picture, index| %>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <% if picture.persisted? %>
       <img src="<%= picture.image.url('40') %>">
         <%= link_to "修改", edit_article_picture_path(id: picture.id, article_id: params[:id]), class: "btn btn-default btn-xs" %>
@@ -34,6 +34,7 @@
         <% end %>
     <% end %>
 <% end %>
+</div>
 <div class="line line-dashed b-b line-lg pull-in"></div>
 
 <%= simple_form_for(@picture, url: article_pictures_path(article_id: params[:id]), html: { multipart: true, class: "form-horizontal" }) do |f| %>

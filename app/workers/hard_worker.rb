@@ -3,6 +3,6 @@ class HardWorker
 
   def perform()
     # Do something
-    puts '===============>'
+    Article.all.update_all(view_count: 0)
   end
 end
