@@ -16,6 +16,14 @@
           <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
             <span>平台管理</span>
           </li>
+             <% if can? :read, Article %>
+            <li class="">
+              <a href="/articles/new" class="auto">
+                <i class="glyphicon glyphicon-edit"></i>
+                <span>新建文章</span>
+              </a>
+            </li>
+            <% end %>
 
             <% if can? :read, Article %>
             <li class="<%= "active" if controller_name == "articles" %>">
@@ -44,7 +52,7 @@
             </li>
             <% end %>
              <% if can? :read, Picture %>
-            <li class="<%= "active" if controller_name == "picture" %>">
+            <li class="<%= "active" if controller_name == "pictures" %>">
               <a href="/pictures" class="auto">
                 <i class="glyphicon glyphicon-picture"></i>
                 <span>图片管理</span>

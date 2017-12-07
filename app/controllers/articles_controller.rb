@@ -55,6 +55,12 @@ class ArticlesController < ApplicationController
   def create
     @article = current_user.articles.build(article_params)
     selected_labels = Label.in(id: params["checked_labels"].try(:values))
+
+    article_label = ""
+    selected_labels.each do |label|
+      article_label += (label.name + ",")
+    end
+    @article[:article_label] = article_label
     @article.labels << selected_labels
 
     respond_to do |format|
@@ -74,6 +80,8 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    selected_labels = Label.in(id: params["checked_labels"].try(:values))
+    @article.labels = selected_labels
     respond_to do |format|
       if @article.update(article_params)
         if !params[:pictures].blank?
@@ -105,6 +113,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content, :from,  :view_count,  photos_attributes: [:id, :article_id, :image])
+      params.require(:article).permit(:title, :content, :from,  :view_count, :article_label,  photos_attributes: [:id, :article_id, :image])
     end
 end

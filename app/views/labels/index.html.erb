@@ -6,7 +6,7 @@
       <%= link_to "新建标签", new_label_path, class: "btn btn-primary btn-xs" %>
     </div>
     <% end %>
-  </div>
+     </div>
   <div class="table-responsive">
     <table class="table table-striped b-t b-light">
       <thead>
@@ -30,7 +30,6 @@
     </table>
   </div>
   <footer class="panel-footer">
-    <%#= paginate @users, views_prefix: 'admin',theme: 'angulr' %>
     <%= render partial: "shared/admin/paginate", locals: { object: @labels } %>
   </footer>
 </div>

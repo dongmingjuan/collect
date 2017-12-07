@@ -10,10 +10,12 @@ class Article
   field :from, type: String
   # 文章点击次数
   field :view_count, type: Integer
+  # 文章标签
+  field :article_label, type: String
 
   has_and_belongs_to_many :labels
   has_many :pictures
   belongs_to :user
   # 全文搜索
-  search_in :title, :content
+  search_in :title, :content, :from, :view_count, :article_label
 end
