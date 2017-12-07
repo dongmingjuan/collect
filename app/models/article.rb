@@ -1,6 +1,7 @@
 class Article
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Search
   # 文章标题
   field :title, type: String
   # 文章内容
@@ -13,4 +14,6 @@ class Article
   has_and_belongs_to_many :labels
   has_many :pictures
   belongs_to :user
+  # 全文搜索
+  search_in :title, :content
 end

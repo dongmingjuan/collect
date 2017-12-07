@@ -49,7 +49,6 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mongoid'
 # 分页插件
 gem 'kaminari'
@@ -70,4 +69,8 @@ gem 'cancancan', '~> 2.0'
 gem 'sidekiq'
 gem 'redis'
 gem "sidekiq-cron"
-###
+# 自动化部署
+gem 'mina-puma', require: false
+gem 'mina-sidekiq'
+# 全文搜索
+gem 'mongoid_search'

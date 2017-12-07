@@ -6,13 +6,8 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    # if current_user.role == 'admin' || current_user.role == 'editor'
-      @articles = Article.all.order_by(:created_at.desc)
-    # else
-    # @articles = current_user.articles.order_by(:created_at.desc)
-    # end
-    @articles = @articles.where(title: /#{params[:title]}/) unless params[:title].blank?
-    @articles = @articles.where(content: /#{params[:content]}/) unless params[:content].blank?
+    @articles = Article.all.order_by(:created_at.desc)
+    @articles = @articles.full_text_search(params[:search]) unless params[:search].blank?
     @articles = @articles.page params[:page]
   end
 

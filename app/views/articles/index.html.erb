@@ -1,11 +1,12 @@
 <div class="panel panel-default">
-  <form action="/articles" method="get">
-    标题
-    <input type="text" id='title' name="title" value="<%= params[:title]%>">
-    内容
-    <input type="text" id='content' name="content" value="<%= params[:content] %>">
-    <input type="submit" name="" value="搜索">
-  </form>
+ <form action="/articles" method="get">
+      <div class="input-group col-md-3" style="margin-top:15px ">
+        <input type="text" class="form-control" placeholder="请输入关键字" id='search' name="search" value="<%= params[:search]%>"/ >
+          <span class="input-group-btn">
+            <input class="btn btn-info btn-search" type="submit" name="" value="搜索">
+          </span>
+      </div>
+    </form>
   <div class="panel-heading">
     文章列表
     <% if can? :create, Article %>
