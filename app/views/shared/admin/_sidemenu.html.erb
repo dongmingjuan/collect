@@ -8,7 +8,7 @@
             <span>导航</span>
           </li>
           <li class="<%= "active" if controller_name == "home" %>">
-            <a href="/admin/home" class="auto">
+            <a href="/" class="auto">
               <i class="glyphicon glyphicon-stats icon text-primary"></i>
               <span class="font-bold">控制面板</span>
             </a>
@@ -38,15 +38,15 @@
             <% if can? :read, Label %>
              <li class="<%= "active" if controller_name == "labels" %>">
               <a href="/labels" class="auto">
-                <i class="fa fa-users"></i>
+                <i class="glyphicon glyphicon-tag"></i>
                 <span>标签管理</span>
               </a>
             </li>
             <% end %>
              <% if can? :read, Picture %>
-            <li class="<%= "active" if controller_name == "photos" %>">
-              <a href="/photos" class="auto">
-                <i class="fa fa-users"></i>
+            <li class="<%= "active" if controller_name == "picture" %>">
+              <a href="/pictures" class="auto">
+                <i class="glyphicon glyphicon-picture"></i>
                 <span>图片管理</span>
               </a>
             </li>

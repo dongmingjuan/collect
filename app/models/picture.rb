@@ -4,5 +4,5 @@ class Picture
   # 图片来源URL地址
    mount_uploader :image, AvatarUploader
 
-  belongs_to :article
+  belongs_to :articles
 end

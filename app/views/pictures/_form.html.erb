@@ -1,10 +1,13 @@
-
-<%= simple_form_for(@picture, url: article_picture_path(id: params[:id]), html: { multipart: true, class: "form-horizontal" }) do |f| %>
-  <img src="<%= picture.image.url('40') %>">
-  <%= f.input :image, label: "图片" %>
+<%= simple_form_for(@photo, url: photo_path(@photo), html: { multipart: true, class: "form-horizontal" }) do |f| %>
+  <img src="<%= @photo.image.url %>">
   <div class="line line-dashed b-b line-lg pull-in"></div>
+  <input type="file" name="photo[image]">
+  <%#= f.input :image, label: "图片" %>
+  <%#= f.input :image, label: "标签名" %>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <%#= f.input :active, as: :boolean, html: true,  label: "活动宣传图片" %>
   <div class="col-sm-10 col-sm-offset-2">
     <%= f.button :submit, "提 交", class: "btn btn-primary" %>
-    <%= link_to "返 回", article_path(Article.find(params[:article_id])), class: "btn btn-default" %>
+    <%= link_to "返 回", photos_path, class: "btn btn-default" %>
   </div>
 <% end %>

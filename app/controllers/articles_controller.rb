@@ -14,10 +14,8 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @article.view_count = $redis.incr("articles:#{@article.id.to_s}:view_count")
-    HardWorker.perform_async()
     @pictures = @article.pictures
-    @picture = @pictures.build
+    @labels = Label.all.map { |label| [label.name, label.id.to_s] }
   end
 
   def ascending
@@ -50,7 +48,6 @@ class ArticlesController < ApplicationController
   def edit
     @article = Article.all.find(params[:id])
     @labels = Label.all.map { |label| [label.name, label.id.to_s] }
-
   end
 
   # POST /articles
@@ -62,11 +59,14 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render :show, status: :created, location: @article }
+        if !params[:pictures].blank?
+          params[:pictures]['image'].each do |image|
+            @article.pictures.create(image: image)
+          end
+        end
+        format.html { redirect_to articles_url, notice: 'Article was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -76,11 +76,14 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
+        if !params[:pictures].blank?
+          params[:pictures]['image'].each do |image|
+            @article.pictures.create(image: image)
+          end
+        end
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -91,7 +94,6 @@ class ArticlesController < ApplicationController
     @article.destroy
     respond_to do |format|
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -103,6 +105,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content, :from,  :view_count)
+      params.require(:article).permit(:title, :content, :from,  :view_count,  photos_attributes: [:id, :article_id, :image])
     end
 end

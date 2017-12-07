@@ -6,9 +6,30 @@
       文章内容
     </label>
     <div class="col-sm-10">
-      <script type="text/plain" id="contentEditor" name="article[content]" id="article_content" style="width:800px;height:300px;"><%= raw(@article.content) %></script>
+      <script type="text/plain" id="contentEditor" name="article[content]" id="article_content" style="width:98%;height:600px;"><%= raw(@article.content) %></script>
     </div>
-  </div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in"></div>
+<% if !@article.pictures.blank? %>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">图片</label>
+      <div class="col-sm-10">
+        <% @article.pictures.each do |p| %>
+          <img src="<%= p.image.url %>" class="img-thumbnail" id="<%= p.id %>" height="18%" width="18%" >
+          <a class="btn btn-default btn-xs" rel="nofollow" data-method="delete" href="/pictures/<%= p.id %>/del" id="<%= p.id %>btn">删除</a>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+<div class="line line-dashed b-b line-lg pull-in"></div>
+<div class="col-sm-offset-2">
+      <%= f.fields_for :pictures do |p| %>
+        <div class="field">
+         <%= p.label "上传图片" %>
+         <%= p.file_field :image, :multiple => true, name: "pictures[image][]" %>
+        </div>
+      <% end %>
+</div>
 <div class="line line-dashed b-b line-lg pull-in"></div>
 <div class="field">
   <div class="form-group string optional article_from">
@@ -43,3 +64,17 @@
     var um1 = UM.getEditor('contentEditor');
   </script>
   <% end %>
+
+  <!-- 隐藏图片 -->
+<% content_for :script do %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      <% @article.pictures.all.each do |picture| %>
+      $("#<%= picture.id %>btn").click(function(){
+        $("#<%= picture.id %>").hide();
+        $("#<%= picture.id %>btn").hide();
+      });
+      <% end %>
+    });
+  </script>
+<% end %>

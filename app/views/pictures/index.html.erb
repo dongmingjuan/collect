@@ -1,25 +1,36 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Pictures</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @pictures.each do |picture| %>
-      <tr>
-        <td><img src="<%= picture.image.url('40') %>"></td>
-        <td><%= link_to 'Show', picture %></td>
-        <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
-        <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
-
-<%= link_to 'New Picture', new_picture_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+        图片列表
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped b-t b-light">
+      <thead>
+        <tr>
+          <th>图片名</th>
+          <th style="width:120px;">创建时间</th>
+          <% if can? :update, Picture %>
+          <th>操作</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+      <% @pictures.each do |picture| %>
+        <tr>
+          <td><%= image_tag picture.image.url('40') %></td>
+          <td><%= picture.created_at.strftime("%F %T")%></td>
+          <% if can? :update, Picture %>
+          <td>
+            <%= link_to "删除", picture_path(picture), method: :delete, class: "btn btn-default btn-xs" %>
+          </td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <footer class="panel-footer">
+    <%#= paginate @users, views_prefix: 'admin',theme: 'angulr' %>
+    <%= render partial: "shared/admin/paginate", locals: { object: @pictures } %>
+  </footer>
+</div>
+</div>

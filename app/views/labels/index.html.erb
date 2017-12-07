@@ -1,11 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
       标签列表
-    <% if can? :update, Label %>
-    <div class="pull-right">
-     <%= link_to "一键激活", allactive_labels_path, method: :put, class: "btn btn-danger btn-xs" %>
-    </div>
-    <% end %>
     <% if can? :create, Label %>
     <div class="pull-right">
       <%= link_to "新建标签", new_label_path, class: "btn btn-primary btn-xs" %>
@@ -25,7 +20,6 @@
             <span class="glyphicon glyphicon-arrow-down" aria-hidden="true">
             </a>
           </th>
-          <th>激活状态</th>
           <th style="width:120px;">创建时间</th>
           <th>操作</th>
         </tr>

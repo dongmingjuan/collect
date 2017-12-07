@@ -1,1 +1,1 @@
-json.array! @pictures, partial: 'pictures/picture', as: :picture
+json.array! @lables, partial: 'lables/lable', as: :lable

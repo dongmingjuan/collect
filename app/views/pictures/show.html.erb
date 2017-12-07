@@ -1,5 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<%= @picture.picurl %><br>
-<%= link_to 'Edit', edit_picture_path(@picture) %> |
-<%= link_to 'Back', pictures_path %>
+<div class="panel panel-default">
+<div class="panel-heading font-bold">
+  查看标签
+</div>
+<div class="panel-body">
+  <%= render "show", label: @label %>
+</div>
+</div>

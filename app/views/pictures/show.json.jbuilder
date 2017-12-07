@@ -1,1 +1,1 @@
-json.partial! "pictures/picture", picture: @picture
+json.partial! "lables/lable", lable: @lable

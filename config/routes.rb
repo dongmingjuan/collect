@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   resources :users, :path => "admin_users"
   # sidekiq网页客服端
   mount Sidekiq::Web => '/admin/sidekiq'
-  resources :photos, only: [:index, :edit, :update, :destroy]
+  resources :pictures do
+    member do
+      delete 'del'
+    end
+  end
   resources :articles do
     resources :pictures#, shallow: true
     collection do
