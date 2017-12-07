@@ -31,15 +31,14 @@
       <% end %>
 </div>
 <div class="line line-dashed b-b line-lg pull-in"></div>
-<div class="field">
-  <div class="form-group string optional article_from">
-    <label class="col-sm-2 control-label string optional" for="article_from">选择标签</label>&nbsp;&nbsp;&nbsp;&nbsp;
-    <% @labels.each_with_index do |label, index| %>
-    <input id="" name="checked_labels[<%= index %>]" type="checkbox" value="<%= label[1] %>" <%= article.labels.find(label[1]).nil? ? '' : 'checked' %> />
-    <label for="pet_dog"><%= label[0] %></label>
-    <% end %>
+<div class="form-group string optional">
+    <label class="col-sm-2 control-label string optional">
+    文章标签
+    </label>
+    <div class="col-sm-10">
+      <input class="input-tags demo-default" type="text" name="article[tags]" id="input-tags" value="<%= @labels %>">
+    </div>
   </div>
-</div>
 <div class="line line-dashed b-b line-lg pull-in"></div>
 <%= f.input :from, label: "文章来源" %>
 <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -77,4 +76,18 @@
       <% end %>
     });
   </script>
+<% end %>
+<% content_for :script do %>
+<script>
+        $('.input-tags').selectize({
+          plugins: ['remove_button'],
+          persist: false,
+          create: true,
+          render: {
+            item: function(data, escape) {
+              return '<div>"' + escape(data.text) + '"</div>';
+            }
+          },
+        });
+        </script>
 <% end %>

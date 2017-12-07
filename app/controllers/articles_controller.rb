@@ -15,7 +15,11 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @pictures = @article.pictures
-    @labels = Label.all.map { |label| [label.name, label.id.to_s] }
+    @labels = ""
+    @article.labels.each do |label|
+      @labels += (label.name + ",")
+    end
+    @labels = @labels.chop
   end
 
   def ascending
@@ -41,27 +45,28 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = current_user.articles.build
-    @labels = Label.all.map { |label| [label.name, label.id.to_s] }
   end
 
   # GET /articles/1/edit
   def edit
     @article = Article.all.find(params[:id])
-    @labels = Label.all.map { |label| [label.name, label.id.to_s] }
+    @labels = ""
+    @article.labels.each do |label|
+      @labels += (label.name + ",")
+    end
+    @labels = @labels.chop
   end
 
   # POST /articles
   # POST /articles.json
   def create
     @article = current_user.articles.build(article_params)
-    selected_labels = Label.in(id: params["checked_labels"].try(:values))
 
-    article_label = ""
-    selected_labels.each do |label|
-      article_label += (label.name + ",")
+    # 添加标签字符串处理
+    if !params[:article][:tags].blank?
+      @article[:article_label] = params[:article][:tags]
+      tags = params[:article][:tags].split(",")
     end
-    @article[:article_label] = article_label
-    @article.labels << selected_labels
 
     respond_to do |format|
       if @article.save
@@ -70,6 +75,15 @@ class ArticlesController < ApplicationController
             @article.pictures.create(image: image)
           end
         end
+        tags.each do |tag|
+          label = Label.find_by(name: tag)
+          if label.blank?
+            @article.labels.create(name: tag)
+          else
+            @article.labels << label
+          end
+        end
+
         format.html { redirect_to articles_url, notice: 'Article was successfully created.' }
       else
         format.html { render :new }
@@ -80,13 +94,23 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    selected_labels = Label.in(id: params["checked_labels"].try(:values))
-    @article.labels = selected_labels
+     # 添加标签字符串处理
+    if !params[:article][:tags].blank?
+      @article[:article_label] = params[:article][:tags]
+      tags = params[:article][:tags].split(",")
+    end
     respond_to do |format|
       if @article.update(article_params)
         if !params[:pictures].blank?
           params[:pictures]['image'].each do |image|
             @article.pictures.create(image: image)
+          end
+        end
+        if !tags.blank?
+          tags.each do |tag|
+            if Label.find_by(name: tag).blank?
+              @article.labels.create(name: tag)
+            end
           end
         end
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
@@ -113,6 +137,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content, :from,  :view_count, :article_label,  photos_attributes: [:id, :article_id, :image])
+      params.require(:article).permit(:title, :content, :from,  :view_count, :article_label, photos_attributes: [:id, :article_id, :image])
     end
 end
