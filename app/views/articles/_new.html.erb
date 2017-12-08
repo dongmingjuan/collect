@@ -55,12 +55,24 @@
         $('.input-tags').selectize({
           plugins: ['remove_button'],
           persist: false,
-          create: true,
+          maxItems: null,
+          searchField: 'value',
+          options: [
+          <% @labels.each do |label| %>
+              {value: '<%= label.name %>'},
+          <% end %>
+          ],
           render: {
-            item: function(data, escape) {
-              return '<div>"' + escape(data.text) + '"</div>';
-            }
+              option: function(data, escape) {
+                  return '<div class="option">' +
+                          '<span class="title">' + escape(data.value) + '</span>' +
+                      '</div>';
+              },
+              item: function(data, escape) {
+                  return '<div class="item">' + escape(data.value) + '</div>';
+              }
           },
+          create: true
         });
         </script>
 <% end %>

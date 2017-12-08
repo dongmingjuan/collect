@@ -45,6 +45,7 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = current_user.articles.build
+    @labels = Label.all
   end
 
   # GET /articles/1/edit
@@ -86,7 +87,7 @@ class ArticlesController < ApplicationController
           end
         end
 
-        format.html { redirect_to articles_url, notice: 'Article was successfully created.' }
+        format.html { redirect_to new_article_url, notice: '文章保存成功！！！！' }
       else
         format.html { render :new }
       end
