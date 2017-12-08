@@ -56,6 +56,7 @@ class ArticlesController < ApplicationController
       @labels += (label.name + ",")
     end
     @labels = @labels.chop
+    @show_labels = Label.all
   end
 
   # POST /articles
