@@ -1,4 +1,12 @@
 <div class="panel panel-default">
+  <form action="/pictures" method="get">
+      <div class="input-group col-md-3" style="margin-top:15px ">
+        <input type="text" class="form-control" placeholder="请输入关键字" id='search' name="search" value="<%= params[:search]%>"/ >
+          <span class="input-group-btn">
+            <input class="btn btn-info btn-search" type="submit" name="" value="搜索">
+          </span>
+      </div>
+    </form>
   <div class="panel-heading">
         图片列表
   </div>
@@ -6,7 +14,8 @@
     <table class="table table-striped b-t b-light">
       <thead>
         <tr>
-          <th>图片名</th>
+          <th>文章</th>
+          <th>图片</th>
           <th style="width:120px;">创建时间</th>
           <% if can? :update, Picture %>
           <th>操作</th>
@@ -16,6 +25,7 @@
       <tbody>
       <% @pictures.each do |picture| %>
         <tr>
+          <td><%= picture.article.blank? ? "" : picture.article.title %></td>
           <td><img src="<%= picture.image.url %>" class="img-thumbnail" width="300px" height="300px"/></td>
           <td><%= picture.created_at.strftime("%F %T")%></td>
           <% if can? :update, Picture %>

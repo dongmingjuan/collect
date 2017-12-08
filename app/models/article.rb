@@ -14,7 +14,7 @@ class Article
   field :article_label, type: String
 
   has_and_belongs_to_many :labels
-  has_many :pictures
+  has_many :pictures, dependent: :delete
   belongs_to :user
   # 全文搜索
   search_in :title, :content, :from, :view_count, :article_label

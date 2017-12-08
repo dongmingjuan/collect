@@ -6,6 +6,12 @@ class PicturesController < ApplicationController
 
   def index
     @pictures = Picture.all.page params[:page]
+    unless params[:search].blank?
+      article = Article.find_by(title: /#{params[:search]}/)
+      unless article.blank?
+      @pictures = @pictures.where(article_id: article.id)
+      end
+    end
   end
 
   def destroy

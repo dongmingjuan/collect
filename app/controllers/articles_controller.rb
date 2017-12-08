@@ -96,7 +96,9 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-     # 添加标签字符串处理
+    # 先清除文章的article_label
+    @article.update(article_label: "")
+    # 添加标签字符串处理
     if !params[:article][:tags].blank?
       @article[:article_label] = params[:article][:tags]
       tags = params[:article][:tags].split(",")
@@ -108,6 +110,7 @@ class ArticlesController < ApplicationController
             @article.pictures.create(image: image)
           end
         end
+        # 先清除文章关联的label
         @article.update(label_ids: nil)
         if !tags.blank?
           tags.each do |tag|
