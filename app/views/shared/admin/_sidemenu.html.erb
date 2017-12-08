@@ -43,14 +43,6 @@
             </li>
             <% end %>
 
-            <% if can? :read, Label %>
-             <li class="<%= "active" if controller_name == "labels" %>">
-              <a href="/labels" class="auto">
-                <i class="glyphicon glyphicon-tag"></i>
-                <span>标签管理</span>
-              </a>
-            </li>
-            <% end %>
              <% if can? :read, Picture %>
             <li class="<%= "active" if controller_name == "pictures" %>">
               <a href="/pictures" class="auto">

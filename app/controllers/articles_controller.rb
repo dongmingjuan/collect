@@ -75,12 +75,14 @@ class ArticlesController < ApplicationController
             @article.pictures.create(image: image)
           end
         end
-        tags.each do |tag|
-          label = Label.find_by(name: tag)
-          if label.blank?
-            @article.labels.create(name: tag)
-          else
-            @article.labels << label
+        if !tags.blank?
+          tags.each do |tag|
+            label = Label.find_by(name: tag)
+            if label.blank?
+              @article.labels.create(name: tag)
+            else
+              @article.labels << label
+            end
           end
         end
 
@@ -106,10 +108,14 @@ class ArticlesController < ApplicationController
             @article.pictures.create(image: image)
           end
         end
+        @article.update(label_ids: nil)
         if !tags.blank?
           tags.each do |tag|
-            if Label.find_by(name: tag).blank?
+            label = Label.find_by(name: tag)
+            if label.blank?
               @article.labels.create(name: tag)
+            else
+              @article.labels << label
             end
           end
         end
