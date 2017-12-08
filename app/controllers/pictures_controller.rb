@@ -3,7 +3,7 @@ class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
   layout 'admin'
-
+  skip_before_action :verify_authenticity_token
   def index
     @pictures = Picture.all.page params[:page]
     unless params[:search].blank?
@@ -22,6 +22,19 @@ class PicturesController < ApplicationController
     end
   end
 
+  def create
+    puts "============="
+    puts params[:picture][:image]
+
+    pic_arrt = params[:picture][:image]
+
+    pic_arrt.each do |pic|
+      if Picture.find_by(origin_url: pic).blank?
+        Picture.create(remote_image_url: pic,origin_url: pic)
+      end
+    end
+  end
+
   def del
     @picture.destroy
   end
@@ -34,6 +47,6 @@ class PicturesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def picture_params
-     params.require(:picture).permit(:image)
+     params.require(:picture).permit(:image,:origin_url)
     end
 end

@@ -48,6 +48,17 @@
   <script type="text/javascript" charset="utf-8" src="/umeditor/lang/zh-cn/zh-cn.js"></script>
   <script type="text/javascript">
     var um1 = UM.getEditor('contentEditor');
+    um1.addListener('contentChange',function(){
+      var uehtmls = um1.getContent().match(/(https:\/\/mmbiz.qpic.cn\S*wx_lazy=1)/g);
+      console.log(uehtmls)
+      console.log("选区已经变化！");
+      $.ajax({
+        type: 'POST',
+        url: "/pictures",
+        data: {"picture[image][]": uehtmls
+        }
+      });
+    })
   </script>
 <% end %>
 <% content_for :script do %>

@@ -18,4 +18,18 @@ class Article
   belongs_to :user
   # 全文搜索
   search_in :title, :content, :from, :view_count, :article_label
+
+  after_create :update_content
+
+  # 文章保存后将微信图片换成本地的图片
+  def update_content
+    pic_urls = self.content.scan(/(https:\/\/mmbiz.qpic.cn\S*wx_lazy=1)/)
+    pic_urls.each do |pic_url|
+      pic_url = pic_url[0]
+      content = self.content
+      upyun_pic = Picture.find_by(origin_url: pic_url).image_url
+      self.update(content: content.gsub(pic_url,upyun_pic))
+    end
+  end
+
 end

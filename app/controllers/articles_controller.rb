@@ -87,7 +87,6 @@ class ArticlesController < ApplicationController
             end
           end
         end
-
         format.html { redirect_to new_article_url, notice: '文章保存成功！！！！' }
       else
         format.html { render :new }
