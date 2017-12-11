@@ -5,7 +5,7 @@ class PicturesController < ApplicationController
   layout 'admin'
   skip_before_action :verify_authenticity_token
   def index
-    @pictures = Picture.all.page params[:page]
+    @pictures = Picture.all.order_by(:created_at.desc).page params[:page]
     unless params[:search].blank?
       article = Article.find_by(title: /#{params[:search]}/)
       unless article.blank?
@@ -25,14 +25,18 @@ class PicturesController < ApplicationController
   def create
     puts "============="
     puts params[:picture][:image]
-
+    p_src = ""
     pic_arrt = params[:picture][:image]
 
     pic_arrt.each do |pic|
       if Picture.find_by(origin_url: pic).blank?
-        Picture.create(remote_image_url: pic,origin_url: pic)
+        p_src += Picture.create(remote_image_url: pic,origin_url: pic).image_url.to_s + ","
+      else
+        p_src += Picture.find_by(origin_url: pic).image_url.to_s + ","
       end
     end
+    p_src = p_src.split(",")
+    render json: {msg: p_src}
   end
 
   def del

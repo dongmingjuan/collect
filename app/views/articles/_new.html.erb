@@ -10,6 +10,12 @@
     </div>
   </div>
   <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+      <label class="col-sm-2 control-label">图片</label>
+      <div class="col-sm-10" id="article_img">
+      </div>
+    </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
   <div class="form-group string optional">
     <label class="col-sm-2 control-label string optional">
     文章标签
@@ -18,15 +24,6 @@
       <input class="input-tags demo-default" type="text" name="article[tags]" id="input-tags" value="">
     </div>
   </div>
-  <div class="line line-dashed b-b line-lg pull-in"></div>
-  <div class="col-sm-offset-2">
-      <%= f.fields_for :pictures do |p| %>
-        <div class="field">
-         <%= p.label "上传图片" %>
-         <%= p.file_field :image, :multiple => true, name: "pictures[image][]" %>
-        </div>
-      <% end %>
-    </div>
   <div class="line line-dashed b-b line-lg pull-in"></div>
   <%= f.input :from, label: "文章来源" %>
   <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -49,14 +46,23 @@
   <script type="text/javascript">
     var um1 = UM.getEditor('contentEditor');
     um1.addListener('contentChange',function(){
-      var uehtmls = um1.getContent().match(/(https:\/\/mmbiz.qpic.cn\S*wx_lazy=1)/g);
-      console.log(uehtmls)
+      var uehtmls = um1.getContent().match(/((https|http):\/\/mmbiz.qpic.cn\S*wx_lazy=1)/g);
+      console.log(uehtmls);
       console.log("选区已经变化！");
       $.ajax({
         type: 'POST',
         url: "/pictures",
         data: {"picture[image][]": uehtmls
-        }
+        },
+        dataType: "text",
+        success: function(json){
+          var pic = eval("("+json+")").msg;
+          console.log(pic);
+          for (var i = 0;i < pic.length; i++) {
+            console.log(pic[i]);
+            $("#article_img").append('<img class="img-thumbnail" width="18%"  height="18%" src=' + pic[i] + '></img>');
+          };
+        },
       });
     })
   </script>
