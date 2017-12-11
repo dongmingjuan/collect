@@ -25,17 +25,16 @@ class PicturesController < ApplicationController
   def create
     puts "============="
     puts params[:picture][:image]
-    p_src = ""
+    p_src = []
     pic_arrt = params[:picture][:image]
 
     pic_arrt.each do |pic|
       if Picture.find_by(origin_url: pic).blank?
-        p_src += Picture.create(remote_image_url: pic,origin_url: pic).image_url.to_s + ","
+        p_src << Picture.create(remote_image_url: pic,origin_url: pic).image_url
       else
-        p_src += Picture.find_by(origin_url: pic).image_url.to_s + ","
+        p_src << Picture.find_by(origin_url: pic).image_url
       end
     end
-    p_src = p_src.split(",")
     render json: {msg: p_src}
   end
 

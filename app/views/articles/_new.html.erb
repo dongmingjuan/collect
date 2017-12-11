@@ -10,6 +10,7 @@
     </div>
   </div>
   <div class="line line-dashed b-b line-lg pull-in"></div>
+  <!-- 动态加载图片 -->
   <div class="form-group">
       <label class="col-sm-2 control-label">图片</label>
       <div class="col-sm-10" id="article_img">
@@ -35,6 +36,7 @@
     <%= link_to "返 回", articles_path, class: "btn btn-default" %>
   </div>
 <% end %>
+<!-- 富文本编辑器 -->
 <%= content_for :style do %>
   <link href="/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
 <% end %>
@@ -46,6 +48,10 @@
   <script type="text/javascript">
     var um1 = UM.getEditor('contentEditor');
     um1.addListener('contentChange',function(){
+      $.LoadingOverlay("show");
+      setTimeout(function(){
+          $.LoadingOverlay("hide");
+      }, 3000);
       var uehtmls = um1.getContent().match(/((https|http):\/\/mmbiz.qpic.cn\S*wx_lazy=1)/g);
       console.log(uehtmls);
       console.log("选区已经变化！");
@@ -67,6 +73,7 @@
     })
   </script>
 <% end %>
+<!-- selectize 标签 -->
 <% content_for :script do %>
 <script>
         $('.input-tags').selectize({

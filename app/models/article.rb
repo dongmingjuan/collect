@@ -36,7 +36,6 @@ class Article
         self.update(content: self.content.gsub(pic_url,upyun_pic))
         self.pictures << pic
       end
-      Picture.where(article_id: nil).delete_all
     end
   end
 
