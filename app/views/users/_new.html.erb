@@ -6,6 +6,12 @@
       <%= image_tag @user.avatar_url('40'), class: "img-thumbnail" %>
     </div>
   <% end %>
+  <div class="form-group">
+  <label class="col-sm-2 control-label">用户权限</label>
+   <div class="col-sm-10">
+      <%= f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %>
+   </div>
+   </div>
   <%= f.input :avatar,  label: "用户头像" %>
   <div class="line line-dashed b-b line-lg pull-in"></div>
   <%= f.input :password, label: "用户密码"%>
