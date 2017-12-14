@@ -12,12 +12,14 @@ class Article
   field :view_count, type: Integer
   # 文章标签
   field :article_label, type: String
+  # 文章来源公众号
+  field :from_wx, type: String
 
   has_and_belongs_to_many :labels
   has_many :pictures, dependent: :delete
   belongs_to :user
   # 全文搜索
-  search_in :title, :content, :from, :view_count, :article_label
+  search_in :title, :content, :from, :view_count, :article_label, :from_wx
 
   after_create :update_content
 

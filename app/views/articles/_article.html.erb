@@ -1,7 +1,9 @@
 <tr>
+  <td><%= article.user ? article.user.email : "" %></td>
   <td><%= article.title %></td>
   <td><%= article.article_label %></td>
-  <td><%= article.from%></td>
+  <td><%= article.from_wx %></td>
+  <td><%= article.from %></td>
   <td><%= article.view_count%></td>
   <td><%= article.created_at.strftime("%F %T")%></td>
   <td>

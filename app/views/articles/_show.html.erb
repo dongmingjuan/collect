@@ -28,8 +28,10 @@
       <input class="input-tags demo-default" type="text" name="article[tags]" id="input-tags" value="<%= @labels %>">
     </div>
   </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+<%= f.input :from_wx, label: "文章来源公众号" %>
 <div class="line line-dashed b-b line-lg pull-in"></div>
-<%= f.input :from, label: "文章来源" %>
+<%= f.input :from, label: "文章来源链接" %>
 <div class="line line-dashed b-b line-lg pull-in"></div>
 <%= f.input :view_count, label: "点击次数" %>
 
