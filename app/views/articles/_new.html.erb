@@ -50,28 +50,31 @@
   <script type="text/javascript">
     var um1 = UM.getEditor('contentEditor');
     um1.addListener('contentChange',function(){
-      $.LoadingOverlay("show");
-      setTimeout(function(){
-          $.LoadingOverlay("hide");
-      }, 3000);
       var uehtmls = um1.getContent().match(/((https|http):\/\/mmbiz.qpic.cn\S*wx_lazy=1)/g);
-      console.log(uehtmls);
-      console.log("选区已经变化！");
-      $.ajax({
-        type: 'POST',
-        url: "/pictures",
-        data: {"picture[image][]": uehtmls
-        },
-        dataType: "text",
-        success: function(json){
-          var pic = eval("("+json+")").msg;
-          console.log(pic);
-          for (var i = 0;i < pic.length; i++) {
-            console.log(pic[i]);
-            $("#article_img").append('<img class="img-thumbnail" width="18%"  height="18%" src=' + pic[i] + '></img>');
-          };
-        },
-      });
+      // console.log(uehtmls);
+      // console.log("选区已经变化！");
+      if (uehtmls != null) {
+        $.ajax({
+          type: 'POST',
+          url: "/pictures",
+          data: {"picture[image][]": uehtmls
+          },
+          dataType: "text",
+          success: function(json){
+            var pic = eval("("+json+")").msg;
+            // console.log(pic);
+            for (var i = 0;i < pic.length; i++) {
+              if (document.getElementById(pic[i]) == null ) {
+                $.LoadingOverlay("show");
+                setTimeout(function(){
+                    $.LoadingOverlay("hide");
+                }, 1000);
+                $("#article_img").append('<img id=' + pic[i] + ' class="img-thumbnail" width="18%"  height="18%" src=' + pic[i] + '></img>');
+              };
+            };
+          },
+        });
+      }
     })
   </script>
 <% end %>
