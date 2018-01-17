@@ -13,7 +13,7 @@ require 'mina_sidekiq/tasks'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :application_name, 'collect'
-set :domain, '101.236.34.71'
+set :domain, '101.236.47.74'
 set :deploy_to, '/var/www/collect'
 set :repository, 'https://github.com/moohao/collect.git'
 set :branch, 'master'

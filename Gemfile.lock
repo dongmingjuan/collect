@@ -86,6 +86,9 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    devise_token_auth (0.1.42)
+      devise (> 3.5.2, <= 4.3)
+      rails (< 6)
     erubi (1.6.1)
     et-orbi (1.0.7)
       tzinfo
@@ -266,6 +269,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   config
   devise
+  devise_token_auth
   jbuilder (~> 2.5)
   kaminari
   kaminari-mongoid
