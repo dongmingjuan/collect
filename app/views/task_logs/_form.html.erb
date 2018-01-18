@@ -1,0 +1,47 @@
+<%= form_with(model: task_log, local: true) do |form| %>
+  <% if task_log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task_log.errors.count, "error") %> prohibited this task_log from being saved:</h2>
+
+      <ul>
+      <% task_log.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :sender %>
+    <%= form.text_field :sender, id: :task_log_sender %>
+  </div>
+
+  <div class="field">
+    <%= form.label :acceptor %>
+    <%= form.text_field :acceptor, id: :task_log_acceptor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :task_title %>
+    <%= form.text_field :task_title, id: :task_log_task_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.date_select :start_time, id: :task_log_start_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.date_select :end_time, id: :task_log_end_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.number_field :status, id: :task_log_status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

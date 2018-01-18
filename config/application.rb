@@ -24,6 +24,13 @@ module CollectArticle
     config.time_zone = "Beijing"
     # 使用简体中文 config/locales/devise.zh-CN.yml
     config.i18n.default_locale = "zh-CN"
+     # 跨域
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options, :put, :update, :delete], expose: ['Authorization']
+      end
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

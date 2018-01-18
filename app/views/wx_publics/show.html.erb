@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nickname:</strong>
+  <%= @wx_public.nickname %>
+</p>
+
+<p>
+  <strong>Manager:</strong>
+  <%= @wx_public.manager %>
+</p>
+
+<p>
+  <strong>Alias:</strong>
+  <%= @wx_public.alias %>
+</p>
+
+<%= link_to 'Edit', edit_wx_public_path(@wx_public) %> |
+<%= link_to 'Back', wx_publics_path %>

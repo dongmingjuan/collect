@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @task.title %>
+</p>
+
+<p>
+  <strong>Addr:</strong>
+  <%= @task.addr %>
+</p>
+
+<p>
+  <strong>Boss name:</strong>
+  <%= @task.boss_name %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @task.mobile %>
+</p>
+
+<p>
+  <strong>Environment:</strong>
+  <%= @task.environment %>
+</p>
+
+<p>
+  <strong>Activity decription:</strong>
+  <%= @task.activity_decription %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @task.status %>
+</p>
+
+<p>
+  <strong>Brand:</strong>
+  <%= @task.brand %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= @task.deadline %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @task.end_time %>
+</p>
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>

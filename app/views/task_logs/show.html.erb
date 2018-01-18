@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @task_log.sender %>
+</p>
+
+<p>
+  <strong>Acceptor:</strong>
+  <%= @task_log.acceptor %>
+</p>
+
+<p>
+  <strong>Task title:</strong>
+  <%= @task_log.task_title %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @task_log.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @task_log.end_time %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @task_log.status %>
+</p>
+
+<%= link_to 'Edit', edit_task_log_path(@task_log) %> |
+<%= link_to 'Back', task_logs_path %>

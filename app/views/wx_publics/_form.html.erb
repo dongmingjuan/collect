@@ -1,0 +1,32 @@
+<%= form_with(model: wx_public, local: true) do |form| %>
+  <% if wx_public.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(wx_public.errors.count, "error") %> prohibited this wx_public from being saved:</h2>
+
+      <ul>
+      <% wx_public.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nickname %>
+    <%= form.text_field :nickname, id: :wx_public_nickname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :manager %>
+    <%= form.text_field :manager, id: :wx_public_manager %>
+  </div>
+
+  <div class="field">
+    <%= form.label :alias %>
+    <%= form.text_field :alias, id: :wx_public_alias %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

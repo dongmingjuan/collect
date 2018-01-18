@@ -1,0 +1,67 @@
+<%= form_with(model: task, local: true) do |form| %>
+  <% if task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :task_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :addr %>
+    <%= form.text_field :addr, id: :task_addr %>
+  </div>
+
+  <div class="field">
+    <%= form.label :boss_name %>
+    <%= form.text_field :boss_name, id: :task_boss_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mobile %>
+    <%= form.text_field :mobile, id: :task_mobile %>
+  </div>
+
+  <div class="field">
+    <%= form.label :environment %>
+    <%= form.text_field :environment, id: :task_environment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :activity_decription %>
+    <%= form.text_field :activity_decription, id: :task_activity_decription %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.number_field :status, id: :task_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :brand %>
+    <%= form.text_field :brand, id: :task_brand %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadline %>
+    <%= form.date_select :deadline, id: :task_deadline %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.date_select :end_time, id: :task_end_time %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

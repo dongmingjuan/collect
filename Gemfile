@@ -55,6 +55,7 @@ gem 'kaminari'
 gem 'kaminari-mongoid'
 # 登录插件
 gem 'devise'
+gem 'devise-jwt'
 # 云存储
 gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
@@ -74,3 +75,5 @@ gem 'mina-puma', require: false
 gem 'mina-sidekiq'
 # 全文搜索
 gem 'mongoid_search'
+# 跨域
+gem 'rack-cors', :require => 'rack/cors'

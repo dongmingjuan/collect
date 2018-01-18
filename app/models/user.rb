@@ -1,7 +1,7 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
-  ROLES = %i[admin user editor]
+  ROLES = %i[admin user editor salseman]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :trackable, :validatable, :registerable
@@ -24,6 +24,15 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
+  # 电话
+  field :mobile, type: String
+  # 备用电话
+  field :mobile_back, type: String
+  # 名字
+  field :name, type: String
+  # 性别
+  field :gender, type: Integer
+
 
   mount_uploader :avatar, AvatarUploader
 
@@ -45,4 +54,8 @@ class User
     role == 'admin'
   end
   has_many :articles
+  has_many :cities
+  has_many :comments
+  has_and_belongs_to_many :wx_publics
+  has_and_belongs_to_many :task_logs
 end
